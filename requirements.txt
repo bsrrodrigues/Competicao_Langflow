@@ -1,0 +1,11 @@
+langflow==1.0.9
+huggingface-hub==0.22.2
+PyMuPDF
+sentence-transformers
+chromadb
+transformers
+scikit-learn
+pandas==2.2.0
+openai==1.35.15
+weaviate-client
+scikit-learn

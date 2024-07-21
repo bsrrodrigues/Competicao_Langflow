@@ -1,0 +1,97 @@
+{
+    "nodes": [
+      {
+        "id": "FileInput",
+        "type": "File",
+        "label": "File Input",
+        "params": {
+          "path": "data/cosmos.pdf",
+          "silent_errors": false
+        },
+        "outputs": [
+          {
+            "type": "Data",
+            "target": "TextSplitter",
+            "output_name": "data"
+          }
+        ]
+      },
+      {
+        "id": "TextSplitter",
+        "type": "SplitText",
+        "label": "Text Splitter",
+        "params": {
+          "chunk_size": 2000,
+          "chunk_overlap": 300,
+          "separator": "\n"
+        },
+        "outputs": [
+          {
+            "type": "Chunks",
+            "target": "OpenAIEmbeddings",
+            "output_name": "chunks"
+          }
+        ]
+      },
+      {
+        "id": "OpenAIEmbeddings",
+        "type": "OpenAIEmbeddings",
+        "label": "OpenAI Embeddings",
+        "params": {
+          "model": "text-embedding-ada-002",
+          "api_key": "your-openai-api-key"
+        },
+        "outputs": [
+          {
+            "type": "Embeddings",
+            "target": "Weaviate",
+            "output_name": "embeddings"
+          }
+        ]
+      },
+      {
+        "id": "Weaviate",
+        "type": "Weaviate",
+        "label": "Weaviate",
+        "params": {
+          "api_key": "your-weaviate-api-key",
+          "index_name": "langflow-cosmos",
+          "text_field": "text",
+          "metadata_field": "metadata",
+          "url": "http://localhost:8080"
+        },
+        "outputs": [
+          {
+            "type": "RetrievalResults",
+            "target": "OpenAIModel",
+            "output_name": "results"
+          }
+        ]
+      },
+      {
+        "id": "OpenAIModel",
+        "type": "OpenAIModel",
+        "label": "OpenAI Model",
+        "params": {
+          "model": "text-davinci-003",
+          "api_key": "sk-proj-2LoZOwXYOLEbCmf8AbxDT3BlbkFJT1gX9D16bcCRAe7LdJpM"
+        },
+        "outputs": [
+          {
+            "type": "Text",
+            "target": "Output",
+            "output_name": "response"
+          }
+        ]
+      },
+      {
+        "id": "Output",
+        "type": "Output",
+        "label": "Output",
+        "params": {
+          "type": "Text"
+        }
+      }
+    ]
+  }
+  

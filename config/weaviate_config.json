@@ -1,0 +1,7 @@
+{
+    "host": "http://localhost:8080",
+    "api_key": "your-api-key",
+    "index_name": "langflow-cosmos",
+    "text_field": "text",
+    "metadata_field": "metadata"
+}

@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  weaviate:
+    image: semitechnologies/weaviate:latest
+    ports:
+      - "8080:8080"
+    environment:
+      QUERY_DEFAULTS_LIMIT: 20
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: /var/lib/weaviate
+      DEFAULT_VECTORIZER_MODULE: none
+      ENABLE_MODULES: text2vec-openai
+      OPENAI_APIKEY: "Ysk-proj-2LoZOwXYOLEbCmf8AbxDT3BlbkFJT1gX9D16bcCRAe7LdJpM"
